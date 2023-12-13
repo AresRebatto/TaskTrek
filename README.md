@@ -3,3 +3,9 @@
 <div align="center">
     <img alt="Icon" src="Docimg/HomeIcon.png" width="108px">
   </div>
+
+### UML delle Classi
+### UML dei Casi D'uso
+### Features
+### Dependencies
+### Funzionamento Script
