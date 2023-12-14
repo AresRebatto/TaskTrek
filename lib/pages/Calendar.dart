@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:task_trek/pages/StandardWidgets.dart';
-import 'package:task_trek/Colori.dart';
 
-class HomePage extends StatelessWidget{
+import '../Colori.dart';
+import 'StandardWidgets.dart';
+
+class CalendarPage extends StatelessWidget
+{
+  const CalendarPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,14 +17,12 @@ class HomePage extends StatelessWidget{
             child: ListView(
               children: [
               ],
-          )
+            )
 
           ),
-          StdBottomNavBar("home", context),
-
-           //Bottom NavBar
-        ],
-      ),
+          StdBottomNavBar("calendar", context),
+        ]
+      )
     );
   }
 
