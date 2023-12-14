@@ -12,12 +12,11 @@ class HomePage extends StatelessWidget{
             color: Colori.cream,
             child: ListView(
               children: [
-
               ],
           )
 
           ),
-          StdBottomNavBar("home"),
+          StdBottomNavBar("home", context),
 
            //Bottom NavBar
         ],
