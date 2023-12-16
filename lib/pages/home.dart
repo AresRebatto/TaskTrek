@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:task_trek/pages/StandardWidgets.dart';
 import 'package:task_trek/Colori.dart';
+import 'package:task_trek/StandardText.dart';
 
 class HomePageState extends StatefulWidget {
   const HomePageState({super.key});
@@ -9,7 +10,7 @@ class HomePageState extends StatefulWidget {
   State<HomePageState> createState() => HomePage();
 }
 class HomePage extends State<HomePageState>{
-  String text = "Premere per far\npartire il cronometro";
+  //String text = "Premere per far\npartire il cronometro";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +22,7 @@ class HomePage extends State<HomePageState>{
               children: [
                 Align(
                   alignment: Alignment.center,
-                  child: StopWatch(text),
+                  child: StopWatch(),
                 ),
               ],
           )
@@ -35,12 +36,12 @@ class HomePage extends State<HomePageState>{
     );
   }
 
-  Widget StopWatch(String text)
+  Widget StopWatch()
   {
     return GestureDetector(
       onTap: ()async{
         setState((){
-          text = "Ciao";
+          StandardText.testoCronometro = "Ciao";
         });
       },
       child: Container(
@@ -58,7 +59,7 @@ class HomePage extends State<HomePageState>{
         child: Align(
             alignment:Alignment.center,
             child:Text(
-                text,
+                StandardText.testoCronometro,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 19,
