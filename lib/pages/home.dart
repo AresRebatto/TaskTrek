@@ -36,12 +36,24 @@ class HomePage extends State<HomePageState>{
     );
   }
 
+
   Widget StopWatch()
   {
+    bool attivo = false;
     return GestureDetector(
       onTap: ()async{
         setState((){
-          StandardText.testoCronometro = "Ciao";
+          if(!attivo)
+          {
+            StandardText.testoCronometro = "Ciao";
+            attivo = true;
+          }else {
+            StandardText.testoCronometro = "Premere per far\npartire il cronometro";
+            print(attivo);
+          }
+
+
+
         });
       },
       child: Container(
