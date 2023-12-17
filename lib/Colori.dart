@@ -13,4 +13,5 @@ class Colori
   static Color brown = const Color.fromRGBO(79,69,87,1.000);
   ///Per le scritte scure
   static Color darkBrown = const Color.fromRGBO(57,54,70,1.000);
+
 }

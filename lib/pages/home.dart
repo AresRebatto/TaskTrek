@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task_trek/pages/StandardWidgets.dart';
 import 'package:task_trek/Colori.dart';
-import 'package:task_trek/StandardText.dart';
+import 'package:task_trek/StopWatchTime.dart';
+
 
 class HomePageState extends StatefulWidget {
   const HomePageState({super.key});
@@ -39,18 +40,18 @@ class HomePage extends State<HomePageState>{
 
   Widget StopWatch()
   {
-    bool attivo = false;
+
     return GestureDetector(
       onTap: ()async{
         setState((){
-          if(!attivo)
+          if(!StopWatchTime.attivo)
           {
-            StandardText.testoCronometro = "Ciao";
-            attivo = true;
+            StopWatchTime.testoCronometro = "Ciao";
           }else {
-            StandardText.testoCronometro = "Premere per far\npartire il cronometro";
-            print(attivo);
+            StopWatchTime.testoCronometro = "Premere per far\npartire il cronometro";
           }
+
+          StopWatchTime.attivo = !StopWatchTime.attivo;
 
 
 
@@ -71,7 +72,7 @@ class HomePage extends State<HomePageState>{
         child: Align(
             alignment:Alignment.center,
             child:Text(
-                StandardText.testoCronometro,
+                StopWatchTime.testoCronometro,
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 19,
