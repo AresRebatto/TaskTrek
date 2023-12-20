@@ -4,8 +4,8 @@ import 'package:task_trek/DataBase.dart';
 
 void main() {
   runApp(const MyApp());
-  DBApp.Inizialize();
-  DBApp.InsertTask("palle");
+  //DBApp.Inizialize();
+
 }
 
 class MyApp extends StatelessWidget {
