@@ -43,7 +43,6 @@ class DBApp{
     }catch(e){
       throw FetchException("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
     }
-
   }
 }
 
