@@ -80,7 +80,7 @@ Widget Home()
        onTap: (){
          Navigator.push(
            contesto,
-           CupertinoPageRoute(builder: (contesto) => CalendarPage()),);
+           CupertinoPageRoute(builder: (contesto) => CalendarState()),);
        },
        child: Container(
          margin: const EdgeInsets.only(left: 20),
@@ -151,7 +151,7 @@ Widget ToDo()
         onTap: (){
           Navigator.push(
             contesto,
-            CupertinoPageRoute(builder: (contesto) => CalendarPage()),);
+            CupertinoPageRoute(builder: (contesto) => CalendarState()),);
         },
         child: Container(
           margin: const EdgeInsets.only(left: 20),
@@ -296,7 +296,7 @@ Widget Analytics()
         onTap: (){
           Navigator.push(
             contesto,
-            CupertinoPageRoute(builder: (contesto) => CalendarPage()),);
+            CupertinoPageRoute(builder: (contesto) => CalendarState()),);
         },
         child: Container(
           margin: const EdgeInsets.only(left: 20),

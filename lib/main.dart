@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:task_trek/pages/home.dart';
+import 'package:task_trek/DataBase.dart';
 
 void main() {
   runApp(const MyApp());
+  DBApp.Inizialize();
+  DBApp.InsertTask("palle");
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
