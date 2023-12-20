@@ -262,7 +262,7 @@ Widget Analytics()
         onTap: (){
           Navigator.push(
             contesto,
-            CupertinoPageRoute(builder: (contesto) => HomePageState()),);
+            CupertinoPageRoute(builder: (contesto) => const HomePageState()),);
         },
         child: Container(
           margin: const EdgeInsets.only(left: 33),

@@ -17,26 +17,26 @@ class DBApp{
       await Supabase.initialize(url: _url, anonKey: _anonKey);
     }catch(e)
     {
-      print("Non è stato possibile connettersi al DB per il seguente motivo: $e");
+      throw ConnectionException("Non è stato possibile connettersi al DB per il seguente motivo: $e");
     }
 
   }
   ///Metodo che inserisce il valore specificato come paramentro come nuovo
   ///record della tabella Task sul DB
-  static InsertTask(value) async
+  static void InsertTask(var value) async
   {
     try{
       await Supabase.instance.client.from('Task').insert({'Nome': value});
     }catch(e)
     {
-      print("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
+      throw FetchException("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
     }
 
   }
 
   ///Scarica tutti i record della tabella Task e li carica in una variabile data, grazie
   ///alla quale poi verranno suddivisi e diventeranno membri di una lista di istanze di Task
-  static FetchTasks() async{
+  static void FetchTasks() async{
     try{
       final data = await Supabase.instance.client.from('Task').select();
       print("Ecco i dati contenuti all'interno della tabella: ${data}");
@@ -45,4 +45,22 @@ class DBApp{
     }
 
   }
+}
+
+//Classi per la definizione di delle eccezioni specifiche per il DataBase
+class DatabaseException implements Exception {
+  final String message;
+  DatabaseException(this.message);
+}
+
+class ConnectionException extends DatabaseException {
+  ConnectionException(String message) : super(message);
+}
+
+class InsertException extends DatabaseException {
+  InsertException(String message) : super(message);
+}
+
+class FetchException extends DatabaseException {
+  FetchException(String message) : super(message);
 }
