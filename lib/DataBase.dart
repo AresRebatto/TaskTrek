@@ -29,7 +29,7 @@ class DBApp{
       await Supabase.instance.client.from('Task').insert({'Nome': value});
     }catch(e)
     {
-      throw FetchException("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
+      throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
     }
 
   }
@@ -41,7 +41,7 @@ class DBApp{
       final data = await Supabase.instance.client.from('Task').select();
       print("Ecco i dati contenuti all'interno della tabella: ${data}");
     }catch(e){
-      print("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
+      throw FetchException("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
     }
 
   }
