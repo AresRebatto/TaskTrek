@@ -40,8 +40,8 @@ class DBApp{
       final data = await Supabase.instance.client.from('Task').select();
       for(var element in data)
       {
-        Task newTask = Task(element.values.toString());
-        taskList?.add(newTask);
+        //Task newTask = Task(element.values.toString());
+        //taskList?.add(newTask);
       }
 
       /*for (var element in taskList!)
