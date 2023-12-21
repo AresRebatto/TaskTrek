@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:task_trek/Task.dart';
 
@@ -7,7 +6,7 @@ class DBApp{
   //Dati per l'accesso al Db su SupaBase
   static const String _url = "https://uqjxahjhvogsrhyeqely.supabase.co";
   static const String _anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxanhhaGpodm9nc3JoeWVxZWx5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI0NjcwNjEsImV4cCI6MjAxODA0MzA2MX0.4LKRjA8ObpyqqA5kOUqPa6ife_emx-QckeQdfwKpwpE";
-  List<Task>? taskList; //Listya dove si inseriranno le istanze generate grazie ai dati del DB
+  static List<Task>? taskList; //Lista dove si inseriranno le istanze generate grazie ai dati del DB
 
   ///E' un metodo che va richiamato ogni volta che si vuole usare il Db e serve per aprire
   ///la connessione con esso
@@ -39,7 +38,16 @@ class DBApp{
   static void FetchTasks() async{
     try{
       final data = await Supabase.instance.client.from('Task').select();
-      print("Ecco i dati contenuti all'interno della tabella: ${data}");
+      for(var element in data)
+      {
+        Task newTask = Task(element.values.toString());
+        taskList?.add(newTask);
+      }
+
+      /*for (var element in taskList!)
+      {
+        print(element.Nome);
+      }*/
     }catch(e){
       throw FetchException("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
     }

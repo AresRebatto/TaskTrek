@@ -4,7 +4,8 @@ import 'package:task_trek/DataBase.dart';
 
 void main() {
   runApp(const MyApp());
-  //DBApp.Inizialize();
+  DBApp.Inizialize();
+  DBApp.FetchTasks();
 
 }
 

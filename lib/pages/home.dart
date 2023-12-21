@@ -27,20 +27,15 @@ class HomePage extends State<HomePageState>{
                 ),
               ],
           )
-
           ),
-          StdBottomNavBar("home", context),
-
-           //Bottom NavBar
+          StdBottomNavBar("home", context), //Bottom NavBar
         ],
       ),
     );
   }
 
-
   Widget StopWatch()
   {
-
     return GestureDetector(
       onTap: ()async{
         setState((){
@@ -50,11 +45,7 @@ class HomePage extends State<HomePageState>{
           }else {
             StopWatchTime.testoCronometro = "Premere per far\npartire il cronometro";
           }
-
           StopWatchTime.attivo = !StopWatchTime.attivo;
-
-
-
         });
       },
       child: Container(
