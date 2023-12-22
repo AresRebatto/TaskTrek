@@ -25,7 +25,9 @@ class DBApp{
   static void InsertTask(var value) async
   {
     try{
-      await Supabase.instance.client.from('Task').insert({'Nome': value});
+      await Supabase.instance.client.from('Task').insert({'Nome': value}); //Inserisce il valore sul DB
+      FetchTasks();//Scarica i dati e aggiorna la lista locale
+
     }catch(e)
     {
       throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
@@ -37,11 +39,11 @@ class DBApp{
   ///alla quale poi verranno suddivisi e diventeranno membri di una lista di istanze di Task
   static void FetchTasks() async{
     try{
+      taskList?.clear();
       final data = await Supabase.instance.client.from('Task').select();
       for(var element in data)
       {
-        //Task newTask = Task(element.values.toString());
-        //taskList?.add(newTask);
+        taskList?.add(Task(element['Nome'], element['PK_TakId']));
       }
 
       /*for (var element in taskList!)
