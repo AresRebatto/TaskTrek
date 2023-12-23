@@ -1,3 +1,5 @@
+import 'package:task_trek/DataBase.dart';
+
 class StopWatchTime {
   int? _ore;
   int? _minuti;
@@ -14,15 +16,18 @@ class StopWatchTime {
     _secondi = 0;
     _idTask = idTask;
   }
-  void avviaTempo(int taskId) {
+  Future<void> avviaTempo(int taskId) async{
     attivo = true;
   }
 
-  void mettiInPausa() {
+  //Una volta che si attiva, mette solo in pausa il funzionamento del metodo avviaTempo
+  void mettiInPausa(){
     attivo = false;
   }
 
-  void bloccaTempo() {
+  //Quando il tempo viene bloccato, devi richiamare il metodo della
+  //classe DBApp per inserire un nuovo valore nella tabella tempo
+  Future<void> bloccaTempo() async{
     attivo = false;
     print("Il tempo si è fermato e i dati sono stati salvati nel database");
   }
