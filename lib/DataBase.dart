@@ -10,7 +10,7 @@ class DBApp{
 
   ///E' un metodo che va richiamato ogni volta che si vuole usare il Db e serve per aprire
   ///la connessione con esso
-  static void Inizialize() async
+  static Future<void> Inizialize() async
   {
     try{
       await Supabase.initialize(url: _url, anonKey: _anonKey);
@@ -22,7 +22,7 @@ class DBApp{
   }
   ///Metodo che inserisce il valore specificato come paramentro come nuovo
   ///record della tabella Task sul DB
-  static void InsertTask(var value) async
+  static Future<void> InsertTask(var value) async
   {
     try{
       await Supabase.instance.client.from('Task').insert({'Nome': value}); //Inserisce il valore sul DB
@@ -37,7 +37,7 @@ class DBApp{
 
   ///Scarica tutti i record della tabella Task e li carica in una variabile data, grazie
   ///alla quale poi verranno suddivisi e diventeranno membri di una lista di istanze di Task
-  static void FetchTasks() async{
+  static Future<void> FetchTasks() async{
     try{
       taskList?.clear();
       final data = await Supabase.instance.client.from('Task').select();

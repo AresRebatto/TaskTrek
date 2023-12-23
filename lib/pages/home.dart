@@ -39,13 +39,15 @@ class HomePage extends State<HomePageState>{
     return GestureDetector(
       onTap: ()async{
         setState((){
-          if(!StopWatchTime.attivo)
+          if(StopWatchTime.attivo == activateState.fermo)
           {
-            StopWatchTime.testoCronometro = "Ciao";
+            StopWatchTime nuovoTempo = StopWatchTime(1);
+            StopWatchTime.attivo = activateState.attivo;
           }else {
             StopWatchTime.testoCronometro = "Premere per far\npartire il cronometro";
+            StopWatchTime.attivo = activateState.fermo;
           }
-          StopWatchTime.attivo = !StopWatchTime.attivo;
+
         });
       },
       child: Container(
