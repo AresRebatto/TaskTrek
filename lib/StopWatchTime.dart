@@ -1,31 +1,54 @@
 import 'package:task_trek/DataBase.dart';
-
+import 'dart:async';
 enum activateState{
   attivo,
   pausa,
   fermo
 }
 class StopWatchTime {
-  int? _ore;
-  int? _minuti;
-  int? _secondi;
+  int _ore = 0;
+  int _minuti = 0;
+  int _secondi = 0;
   int? _idTask;
 
+  //Attributi per l'interfaccia
   static String startText = "Premere per far\npartire il cronometro";
   static String testoCronometro = startText;
   String timetext = "00:00:00";
   static activateState attivo = activateState.fermo;
 
-  StopWatchTime(idTask)
+  StopWatchTime()
   {
-    _ore = 0;
-    _minuti = 0;
-    _secondi = 0;
-    _idTask = idTask;
     testoCronometro = timetext;
   }
+
+  StopWatchTime.fetch(this._idTask);
+
   Future<void> avviaTempo(int taskId) async{
     attivo = activateState.attivo;
+    while (attivo == activateState.attivo)
+    {
+      await Future.delayed(const Duration(seconds: 1));
+      if(_secondi < 59)
+        _secondi += 1;
+      else if(_secondi == 59)
+      {
+        if(_minuti < 59)
+        {
+          _secondi = 0;
+          _minuti += 1;
+        }else
+        {
+          _secondi = 0;
+          _minuti =0;
+          _ore += 1;
+        }
+      }
+      timetext = "$_ore:$_minuti:$_secondi";
+      print(timetext);
+    }
+
+
   }
 
   //Una volta che si attiva, mette solo in pausa il funzionamento del metodo avviaTempo
