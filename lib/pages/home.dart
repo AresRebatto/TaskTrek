@@ -38,21 +38,28 @@ class HomePage extends State<HomePageState>{
   {
     return GestureDetector(
       onTap: ()async{
-        setState(() async{
-          if(StopWatchTime.attivo == activateState.fermo)
-          {
-            StopWatchTime nuovoTempo = StopWatchTime();
-            StopWatchTime.attivo = activateState.attivo;
-            nuovoTempo.avviaTempo(1);
-            //Solo per aggiornare interfaccia
-            while(StopWatchTime.attivo == activateState.attivo){
-              await Future.delayed(const Duration(seconds: 1));
+        if(StopWatchTime.attivo == activateState.fermo)
+        {
+
+          StopWatchTime nuovoTempo = StopWatchTime();
+          setState(() {
+            nuovoTempo.ChangeInterface();
+          });
+          StopWatchTime.attivo = activateState.attivo;
+          nuovoTempo.avviaTempo(1);
+          //Solo per aggiornare interfaccia
+          while(StopWatchTime.attivo == activateState.attivo){
+            await Future.delayed(const Duration(seconds: 1));
+            setState(() {
               StopWatchTime.testoCronometro = nuovoTempo.timetext;
-            }
-          }else {
-            StopWatchTime.testoCronometro = "Premere per far\npartire il cronometro";
-            StopWatchTime.attivo = activateState.fermo;
+            });
+
           }
+        }else {
+          StopWatchTime.testoCronometro = "Premere per far\npartire il cronometro";
+          StopWatchTime.attivo = activateState.fermo;
+        }
+        setState((){
 
         });
       },
