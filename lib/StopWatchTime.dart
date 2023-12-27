@@ -2,14 +2,13 @@ import 'package:task_trek/DataBase.dart';
 import 'dart:async';
 enum activateState{
   attivo,
-  pausa,
   fermo
 }
 class StopWatchTime {
   int _ore = 0;
   int _minuti = 0;
   int _secondi = 0;
-  int? _idTask;
+  int _idTask=0;
 
   //Attributi per l'interfaccia
   static String startText = "Premere per far\npartire il cronometro";
@@ -19,7 +18,7 @@ class StopWatchTime {
 
   StopWatchTime(){}
 
-  StopWatchTime.fetch(this._idTask);
+  StopWatchTime.fetch(this._idTask, this._ore, this._minuti, this._secondi);
 
   void ChangeInterface()
   {
@@ -45,21 +44,18 @@ class StopWatchTime {
           _ore += 1;
         }
       }
-      timetext = "$_ore:$_minuti:$_secondi";
+      timetext = "${_ore <= 9? "0$_ore":_ore}:${_minuti <= 9? "0$_minuti":_minuti}:${_secondi <= 9? "0$_secondi":_secondi}";
       print(timetext);
     }
 
 
   }
 
-  //Una volta che si attiva, mette solo in pausa il funzionamento del metodo avviaTempo
-  void mettiInPausa(){
-    attivo = activateState.pausa;
-  }
 
   //Quando il tempo viene bloccato, devi richiamare il metodo della
   //classe DBApp per inserire un nuovo valore nella tabella tempo
   Future<void> bloccaTempo() async{
     attivo = activateState.fermo;
+    DBApp.InsertTime(_ore, _minuti, _secondi, _idTask);
   }
 }

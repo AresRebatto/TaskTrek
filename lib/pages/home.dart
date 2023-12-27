@@ -36,12 +36,14 @@ class HomePage extends State<HomePageState>{
 
   Widget StopWatch()
   {
+    StopWatchTime nuovoTempo = StopWatchTime();
     return GestureDetector(
       onTap: ()async{
+
         if(StopWatchTime.attivo == activateState.fermo)
         {
 
-          StopWatchTime nuovoTempo = StopWatchTime();
+          nuovoTempo = StopWatchTime();
           setState(() {
             nuovoTempo.ChangeInterface();
           });
@@ -50,14 +52,15 @@ class HomePage extends State<HomePageState>{
           //Solo per aggiornare interfaccia
           while(StopWatchTime.attivo == activateState.attivo){
             await Future.delayed(const Duration(seconds: 1));
-            setState(() {
-              StopWatchTime.testoCronometro = nuovoTempo.timetext;
+            setState((){
+              if(StopWatchTime.attivo == activateState.attivo)
+                StopWatchTime.testoCronometro = nuovoTempo.timetext;
             });
 
           }
         }else {
-          StopWatchTime.testoCronometro = "Premere per far\npartire il cronometro";
-          StopWatchTime.attivo = activateState.fermo;
+          StopWatchTime.testoCronometro = StopWatchTime.startText;
+          nuovoTempo.bloccaTempo();
         }
         setState((){
 
