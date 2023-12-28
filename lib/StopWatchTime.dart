@@ -16,16 +16,14 @@ class StopWatchTime {
   String timetext = "00:00:00";
   static activateState attivo = activateState.fermo;
 
-  StopWatchTime(){
-  }
-
-
+  StopWatchTime(){}
   StopWatchTime.fetch(this._idTask, this._ore, this._minuti, this._secondi);
 
   void ChangeInterface()
   {
     testoCronometro = timetext;
   }
+
   Future<void> avviaTempo(int taskId) async{
     attivo = activateState.attivo;
     while (attivo == activateState.attivo)

@@ -3,6 +3,7 @@ import 'package:task_trek/pages/StandardWidgets.dart';
 import 'package:task_trek/Colori.dart';
 import 'package:task_trek/StopWatchTime.dart';
 import 'package:task_trek/Task.dart';
+import 'package:task_trek/pages/NewTaskPage.dart';
 
 
 class HomePageState extends StatefulWidget {
@@ -12,7 +13,6 @@ class HomePageState extends StatefulWidget {
   State<HomePageState> createState() => HomePage();
 }
 class HomePage extends State<HomePageState>{
-  //String text = "Premere per far\npartire il cronometro";
   StopWatchTime time = StopWatchTime();
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class HomePage extends State<HomePageState>{
             color: Colori.cream,
             child: ListView(
               children: [
-                TaskSelect(),
+                TaskSelect(context),
                 Align(
                   alignment: Alignment.center,
                   child: StopWatch(time),
@@ -37,22 +37,44 @@ class HomePage extends State<HomePageState>{
     );
   }
 
-  Widget TaskSelect()
+  Widget TaskSelect(var contesto)
   {
     return Container(
-      width: 40,
+      width: 50,
       margin: const EdgeInsets.only(right: 130, left: 130, top: 100),
 
       child:DropdownButton<String>(
-        icon: Icon(
+          value: "",
+          icon: Icon(
           Icons.arrow_drop_down,
           color: Colori.darkBrown,
         ),
-        value: Task.fieldText,
         items: const[
-          DropdownMenuItem(child: Text("Crea una nuova Task"), value: "NewTask",)
+          DropdownMenuItem(
+            value: "",
+            child: Text(
+              "",
+              style: TextStyle(
+                  fontSize: 13.5
+              ),
+            )
+            ,),
+          DropdownMenuItem(
+            value: "NewTask",
+              child: Text(
+                  "Crea una nuova Task",
+                  style: TextStyle(
+                    fontSize: 13.5
+                  ),
+              )
+            ,)
         ],
         onChanged: (String? selectValue){
+          if(selectValue == "NewTask"){
+            Navigator.push(
+              contesto,
+              MaterialPageRoute(builder: (contesto) => const NewTaskState()),);
+          }
 
         }
       )

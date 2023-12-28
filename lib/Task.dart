@@ -7,7 +7,6 @@ class Task
   Obiettivo? _obiettivo;
   int? _taskId;
 
-  static String fieldText = '';
   Task(String nome, int taskId, {int? ore, int? minuti, int? secondi})
   {
     if(ore != null && minuti != null && secondi != null)

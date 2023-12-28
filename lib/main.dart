@@ -4,6 +4,7 @@ import 'package:task_trek/DataBase.dart';
 
 void main() {
   runApp(const MyApp());
+  //metodi per inizializzare e scaricare tutti i dati in locale
   DBApp.Inizialize();
   DBApp.FetchTasks();
 
@@ -11,7 +12,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
