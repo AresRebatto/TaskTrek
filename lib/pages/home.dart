@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:task_trek/pages/StandardWidgets.dart';
 import 'package:task_trek/Colori.dart';
 import 'package:task_trek/StopWatchTime.dart';
+import 'package:task_trek/Task.dart';
 
 
 class HomePageState extends StatefulWidget {
@@ -22,6 +23,7 @@ class HomePage extends State<HomePageState>{
             color: Colori.cream,
             child: ListView(
               children: [
+                TaskSelect(),
                 Align(
                   alignment: Alignment.center,
                   child: StopWatch(time),
@@ -35,9 +37,29 @@ class HomePage extends State<HomePageState>{
     );
   }
 
+  Widget TaskSelect()
+  {
+    return Container(
+      width: 40,
+      margin: const EdgeInsets.only(right: 130, left: 130, top: 100),
+
+      child:DropdownButton<String>(
+        icon: Icon(
+          Icons.arrow_drop_down,
+          color: Colori.darkBrown,
+        ),
+        value: Task.fieldText,
+        items: const[
+          DropdownMenuItem(child: Text("Crea una nuova Task"), value: "NewTask",)
+        ],
+        onChanged: (String? selectValue){
+
+        }
+      )
+    );
+  }
   Widget StopWatch(nuovoTempo)
   {
-
     return GestureDetector(
       onTap: ()async{
 
@@ -66,7 +88,7 @@ class HomePage extends State<HomePageState>{
         });
       },
       child: Container(
-        margin: const EdgeInsets.only(top: 190),
+        margin: const EdgeInsets.only(top: 120),
         height: 260,
         width: 260,
         decoration: BoxDecoration(
