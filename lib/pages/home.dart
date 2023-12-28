@@ -12,6 +12,7 @@ class HomePageState extends StatefulWidget {
 }
 class HomePage extends State<HomePageState>{
   //String text = "Premere per far\npartire il cronometro";
+  StopWatchTime time = StopWatchTime();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +24,7 @@ class HomePage extends State<HomePageState>{
               children: [
                 Align(
                   alignment: Alignment.center,
-                  child: StopWatch(),
+                  child: StopWatch(time),
                 ),
               ],
           )
@@ -34,16 +35,14 @@ class HomePage extends State<HomePageState>{
     );
   }
 
-  Widget StopWatch()
+  Widget StopWatch(nuovoTempo)
   {
-    StopWatchTime nuovoTempo = StopWatchTime();
+
     return GestureDetector(
       onTap: ()async{
 
         if(StopWatchTime.attivo == activateState.fermo)
         {
-
-          nuovoTempo = StopWatchTime();
           setState(() {
             nuovoTempo.ChangeInterface();
           });

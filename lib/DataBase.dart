@@ -20,9 +20,9 @@ class DBApp{
       await Supabase.initialize(url: _url, anonKey: _anonKey);
     }catch(e)
     {
-      throw ConnectionException("Non è stato possibile connettersi al DB per il seguente motivo: $e");
+      //throw ConnectionException("Non è stato possibile connettersi al DB per il seguente motivo: $e");
+      print("Non è stato possibile connettersi al DB per il seguente motivo: $e");
     }
-
   }
   ///Metodo che inserisce il valore specificato come paramentro come nuovo
   ///record della tabella Task sul DB
@@ -34,7 +34,8 @@ class DBApp{
 
     }catch(e)
     {
-      throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
+      print("Non è stato possibile connettersi al DB per il seguente motivo: $e");
+      //throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
     }
 
   }
@@ -59,9 +60,10 @@ class DBApp{
     try{
       await Supabase.instance.client.from('Tempo').insert({'FK_TaskId': FK, 'Ore': hours, 'Minuti': minutes, 'Secondi': seconds});
       FetchTime();
+      //FetchTime();
     }catch(e)
     {
-      //throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
+      throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
     }
   }
 

@@ -8,7 +8,7 @@ class StopWatchTime {
   int _ore = 0;
   int _minuti = 0;
   int _secondi = 0;
-  int _idTask=0;
+  int _idTask=22;
 
   //Attributi per l'interfaccia
   static String startText = "Premere per far\npartire il cronometro";
@@ -16,7 +16,9 @@ class StopWatchTime {
   String timetext = "00:00:00";
   static activateState attivo = activateState.fermo;
 
-  StopWatchTime(){}
+  StopWatchTime(){
+  }
+
 
   StopWatchTime.fetch(this._idTask, this._ore, this._minuti, this._secondi);
 
@@ -56,6 +58,10 @@ class StopWatchTime {
   //classe DBApp per inserire un nuovo valore nella tabella tempo
   Future<void> bloccaTempo() async{
     attivo = activateState.fermo;
-    DBApp.InsertTime(_ore, _minuti, _secondi, _idTask);
+    DBApp.InsertTime(this._ore, this._minuti, this._secondi, this._idTask);
+
+    _ore = 0;
+    _minuti = 0;
+    _secondi = 0;
   }
 }
