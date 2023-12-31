@@ -24,6 +24,16 @@ class DBApp{
       print("Non è stato possibile connettersi al DB per il seguente motivo: $e");
     }
   }
+
+  static Future<void> FetchAll() async{
+    try{
+      FetchTasks();
+      FetchTime();
+    }catch(e)
+    {
+      throw FetchException("Non è stato possibile scaricare i dati per il seguente motivo: $e");
+    }
+  }
   ///Metodo che inserisce il valore specificato come paramentro come nuovo
   ///record della tabella Task sul DB
   static Future<void> InsertTask(var value) async

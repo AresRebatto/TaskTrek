@@ -6,7 +6,8 @@ void main() {
   runApp(const MyApp());
   //metodi per inizializzare e scaricare tutti i dati in locale
   DBApp.Inizialize();
-  DBApp.FetchTasks();
+  DBApp.FetchAll();
+  DBApp.InsertTask("Ar");
 
 }
 

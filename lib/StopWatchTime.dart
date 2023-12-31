@@ -1,5 +1,6 @@
 import 'package:task_trek/DataBase.dart';
 import 'dart:async';
+import 'package:task_trek/Task.dart';
 enum activateState{
   attivo,
   fermo
@@ -61,5 +62,18 @@ class StopWatchTime {
     _ore = 0;
     _minuti = 0;
     _secondi = 0;
+  }
+
+  ///Dato il nome di una task all'interno del DataBase come parametro
+  ///ritorna la PK della suddetta Task.[Non funziona. Da riscrivere]
+  int? findTaskId(String searchString) {
+    if (DBApp.taskList != null) {
+      for (Task? task in DBApp.taskList!) {
+        if (task?.Nome?.contains(searchString) ?? false) {
+          return task?.taskId;
+        }
+      }
+    }
+    return null;
   }
 }
