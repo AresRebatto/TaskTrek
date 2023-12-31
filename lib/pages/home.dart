@@ -84,7 +84,7 @@ class HomePage extends State<HomePageState>{
   {
     return GestureDetector(
       onTap: ()async{
-        print(StopWatchTime().findTaskId("Ar"));
+
         if(StopWatchTime.attivo == activateState.fermo)
         {
           setState(() {
