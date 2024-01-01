@@ -25,6 +25,7 @@ class StopWatchTime {
     testoCronometro = timetext;
   }
 
+  ///Avvia il tempo dell'istanza generata
   Future<void> avviaTempo(int taskId) async{
     attivo = activateState.attivo;
     _idTask = taskId;
@@ -67,23 +68,12 @@ class StopWatchTime {
   ///Dato il nome di una task all'interno del DataBase come parametro
   ///ritorna la PK della suddetta Task.[Non funziona. Da riscrivere]
   static int? findTaskId(String searchString) {
-    if (DBApp.taskList != null) {
-      for (Task? task in DBApp.taskList!) {
-        if (task != null && task.Nome != null && task.Nome!.indexOf(searchString) != -1) {
-          return task.taskId;
-        }
+    for (Task? task in DBApp.taskList) {
+      if (task != null && task.Nome.contains(searchString)) {
+        return task.taskId;
       }
     }
     return null;
   }
-  /*int? findTaskId(String searchString) {
-    if (DBApp.taskList != null) {
-      for (Task? task in DBApp.taskList!) {
-        if (task?.Nome?.contains(searchString) ?? false) {
-          return task?.taskId;
-        }
-      }
-    }
-    return null;
-  }*/
+
 }

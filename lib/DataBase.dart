@@ -25,6 +25,8 @@ class DBApp{
     }
   }
 
+  ///Funzione per caricare tutte le liste in una volta. Utile da richiamare appena l'app
+  ///viene avviata, nel main
   static Future<void> FetchAll() async{
     try{
       FetchTasks();
