@@ -11,6 +11,7 @@ void main() {
   DBApp.Inizialize();
   DBApp.FetchAll();
 
+  //Avvia l'app
   runApp(const MyApp());
 }
 
