@@ -9,10 +9,11 @@ class Task
 
   Task(String nome, int taskId, {int? ore, int? minuti, int? secondi})
   {
-    if(ore != null && minuti != null && secondi != null)
+    if(ore != null && minuti != null && secondi != null) {
       _obiettivo = Obiettivo(taskId, ore, minuti, secondi);
-    else
+    } else {
       _obiettivo = Obiettivo(taskId, 0,0,0);
+    }
     _nome = nome;
     _taskId = taskId;
   }

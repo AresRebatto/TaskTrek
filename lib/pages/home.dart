@@ -114,8 +114,9 @@ class HomePage extends State<HomePageState>{
           while(StopWatchTime.attivo == activateState.attivo){
             await Future.delayed(const Duration(seconds: 1));
             setState((){
-              if(StopWatchTime.attivo == activateState.attivo)
+              if(StopWatchTime.attivo == activateState.attivo) {
                 StopWatchTime.testoCronometro = nuovoTempo.timetext;
+              }
             });
 
           }
