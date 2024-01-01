@@ -10,7 +10,7 @@ class DBApp{
 
   //Liste per caricare in locale i dati sul DB
   static List<Task> taskList =[];
-  static List<StopWatchTime>? timeList;
+  static List<StopWatchTime> timeList = [];
 
   ///E' un metodo che va richiamato ogni volta che si vuole usare il Db e serve per aprire
   ///la connessione con esso
@@ -84,11 +84,11 @@ class DBApp{
   ///in una lista creata appositamente
   static Future<void> FetchTime() async{
     try{
-      timeList?.clear();
+      timeList.clear();
       final data = await Supabase.instance.client.from('Tempo').select();
       for(var element in data)
       {
-        timeList?.add(StopWatchTime.fetch(element['FK_TaskId'], element['Ore'], element['Minuti'], element['Secondi']));
+        timeList.add(StopWatchTime.fetch(element['FK_TaskId'], element['Ore'], element['Minuti'], element['Secondi']));
       }
 
     }catch(e){
