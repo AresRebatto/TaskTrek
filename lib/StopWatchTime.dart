@@ -27,6 +27,7 @@ class StopWatchTime {
 
   Future<void> avviaTempo(int taskId) async{
     attivo = activateState.attivo;
+    _idTask = taskId;
     while (attivo == activateState.attivo)
     {
       await Future.delayed(const Duration(seconds: 1));
@@ -46,7 +47,6 @@ class StopWatchTime {
         }
       }
       timetext = "${_ore <= 9? "0$_ore":_ore}:${_minuti <= 9? "0$_minuti":_minuti}:${_secondi <= 9? "0$_secondi":_secondi}";
-      print(timetext);
     }
 
 

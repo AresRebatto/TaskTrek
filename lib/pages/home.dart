@@ -15,6 +15,8 @@ class HomePageState extends StatefulWidget {
 }
 class HomePage extends State<HomePageState>{
   StopWatchTime time = StopWatchTime();
+  String taskName = "";
+  String selVal = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,13 +47,13 @@ class HomePage extends State<HomePageState>{
       margin: const EdgeInsets.only(right: 130, left: 130, top: 100),
 
       child:DropdownButton<String>(
-          value: "",
+          value: selVal,
           icon: Icon(
           Icons.arrow_drop_down,
           color: Colori.darkBrown,
         ),
-        items: const[
-          DropdownMenuItem(
+        items:[
+          const DropdownMenuItem(
             value: "",
             child: Text(
               "",
@@ -60,7 +62,17 @@ class HomePage extends State<HomePageState>{
               ),
             )
             ,),
-          DropdownMenuItem(
+          for(var elements in DBApp.taskList)
+             DropdownMenuItem(
+                 value: elements.Nome,
+                child: Text(
+                  elements.Nome,
+                  style: const TextStyle(
+                    fontSize: 13.5
+                  ),
+                )
+             ),
+          const DropdownMenuItem(
             value: "NewTask",
               child: Text(
                   "Crea una nuova Task",
@@ -75,6 +87,12 @@ class HomePage extends State<HomePageState>{
             Navigator.push(
               contesto,
               MaterialPageRoute(builder: (contesto) => const NewTaskState()),);
+          }else {
+            setState(() {
+              selVal = selectValue!;
+            });
+            taskName = selectValue!;
+
           }
 
         }
@@ -85,16 +103,13 @@ class HomePage extends State<HomePageState>{
   {
     return GestureDetector(
       onTap: ()async{
-        print(StopWatchTime.findTaskId("Studiare"));
-        if(DBApp.taskList == null)
-          print("La lista è vuota");
         if(StopWatchTime.attivo == activateState.fermo)
         {
           setState(() {
             nuovoTempo.ChangeInterface();
           });
           StopWatchTime.attivo = activateState.attivo;
-          nuovoTempo.avviaTempo(1);
+          nuovoTempo.avviaTempo(StopWatchTime.findTaskId(taskName));
           //Solo per aggiornare interfaccia
           while(StopWatchTime.attivo == activateState.attivo){
             await Future.delayed(const Duration(seconds: 1));

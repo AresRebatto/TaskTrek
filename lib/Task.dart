@@ -3,7 +3,7 @@ import 'package:task_trek/Obiettivo.dart';
 
 class Task
 {
-  String? _nome;
+  String _nome = "";
   Obiettivo? _obiettivo;
   int? _taskId;
 
@@ -17,6 +17,6 @@ class Task
     _taskId = taskId;
   }
 
-  String? get Nome => _nome;
+  String get Nome => _nome;
   int? get taskId => _taskId;
 }
