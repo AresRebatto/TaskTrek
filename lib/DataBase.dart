@@ -9,7 +9,7 @@ class DBApp{
   static const String _anonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxanhhaGpodm9nc3JoeWVxZWx5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI0NjcwNjEsImV4cCI6MjAxODA0MzA2MX0.4LKRjA8ObpyqqA5kOUqPa6ife_emx-QckeQdfwKpwpE";
 
   //Liste per caricare in locale i dati sul DB
-  static List<Task>? taskList;
+  static List<Task> taskList =[];
   static List<StopWatchTime>? timeList;
 
   ///E' un metodo che va richiamato ogni volta che si vuole usare il Db e serve per aprire
@@ -54,15 +54,18 @@ class DBApp{
   ///alla quale poi verranno suddivisi e diventeranno membri di una lista di istanze di Task
   static Future<void> FetchTasks() async{
     try{
-      taskList?.clear();
+      taskList.clear();
       final data = await Supabase.instance.client.from('Task').select();
       for(var element in data)
       {
-        taskList?.add(Task(element['Nome'], element['PK_TakId']));
+
+        taskList.add(Task(element['Nome'].toString(), element['PK_TakId'] as int));
+        //for(var dot in taskList)
+          //print(dot.Nome);
       }
 
     }catch(e){
-      throw FetchException("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
+      print("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
     }
   }
   ///Inserisce un valore di un nuovo tempo all'interno del DataBase
@@ -73,7 +76,7 @@ class DBApp{
       //FetchTime();
     }catch(e)
     {
-      throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
+      print("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
     }
   }
 

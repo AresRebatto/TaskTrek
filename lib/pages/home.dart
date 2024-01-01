@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:task_trek/DataBase.dart';
 import 'package:task_trek/pages/StandardWidgets.dart';
 import 'package:task_trek/Colori.dart';
 import 'package:task_trek/StopWatchTime.dart';
@@ -84,7 +85,9 @@ class HomePage extends State<HomePageState>{
   {
     return GestureDetector(
       onTap: ()async{
-
+        print(StopWatchTime.findTaskId("Studiare"));
+        if(DBApp.taskList == null)
+          print("La lista è vuota");
         if(StopWatchTime.attivo == activateState.fermo)
         {
           setState(() {

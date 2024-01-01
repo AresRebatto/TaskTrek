@@ -9,7 +9,7 @@ class StopWatchTime {
   int _ore = 0;
   int _minuti = 0;
   int _secondi = 0;
-  int _idTask=22;
+  int _idTask=28;
 
   //Attributi per l'interfaccia
   static String startText = "Premere per far\npartire il cronometro";
@@ -66,7 +66,17 @@ class StopWatchTime {
 
   ///Dato il nome di una task all'interno del DataBase come parametro
   ///ritorna la PK della suddetta Task.[Non funziona. Da riscrivere]
-  int? findTaskId(String searchString) {
+  static int? findTaskId(String searchString) {
+    if (DBApp.taskList != null) {
+      for (Task? task in DBApp.taskList!) {
+        if (task != null && task.Nome != null && task.Nome!.indexOf(searchString) != -1) {
+          return task.taskId;
+        }
+      }
+    }
+    return null;
+  }
+  /*int? findTaskId(String searchString) {
     if (DBApp.taskList != null) {
       for (Task? task in DBApp.taskList!) {
         if (task?.Nome?.contains(searchString) ?? false) {
@@ -75,5 +85,5 @@ class StopWatchTime {
       }
     }
     return null;
-  }
+  }*/
 }
