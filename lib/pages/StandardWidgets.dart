@@ -63,7 +63,7 @@ Widget Home()
        onTap: (){
          Navigator.push(
            contesto,
-           CupertinoPageRoute(builder: (contesto) => ToDoPage()),);
+           CupertinoPageRoute(builder: (contesto) => ToDoPageState()),);
        },
        child: Container(
          margin: const EdgeInsets.only(left: 20),
@@ -210,7 +210,7 @@ Widget Calendar()
         onTap: (){
           Navigator.push(
             contesto,
-            CupertinoPageRoute(builder: (contesto) => const ToDoPage()),);
+            CupertinoPageRoute(builder: (contesto) => const ToDoPageState()),);
         },
         child: Container(
           margin: const EdgeInsets.only(left: 20),
@@ -280,7 +280,7 @@ Widget Analytics()
         onTap: (){
           Navigator.push(
             contesto,
-            CupertinoPageRoute(builder: (contesto) => const ToDoPage()),);
+            CupertinoPageRoute(builder: (contesto) => const ToDoPageState()),);
         },
         child: Container(
           margin: const EdgeInsets.only(left: 20),
