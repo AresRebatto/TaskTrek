@@ -1,6 +1,8 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:task_trek/Task.dart';
 import 'package:task_trek/StopWatchTime.dart';
+import 'package:task_trek/Evento.dart';
+import 'package:task_trek/ToDoTh.dart';
 
 ///DataBase class per la connessione al DataBase su supabase
 class DBApp{
@@ -11,6 +13,8 @@ class DBApp{
   //Liste per caricare in locale i dati sul DB
   static List<Task> taskList =[];
   static List<StopWatchTime> timeList = [];
+  static List<Event> eventsList = [];
+  static List<ToDoTh> toDoList = [];
 
   ///E' un metodo che va richiamato ogni volta che si vuole usare il Db e serve per aprire
   ///la connessione con esso
@@ -91,6 +95,62 @@ class DBApp{
       for(var element in data)
       {
         timeList.add(StopWatchTime.fetch(element['FK_TaskId'], element['Ore'], element['Minuti'], element['Secondi']));
+      }
+
+    }catch(e){
+      throw FetchException("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
+    }
+  }
+
+  ///Inserisce un valore di una nuova attività all'interno del DataBase
+  static Future<void> InsertEvent(String nome, DateTime data) async{
+    try{
+      await Supabase.instance.client.from('Evento').insert({'Nome': nome, 'Data': data});
+      FetchTime();
+      //FetchTime();
+    }catch(e)
+    {
+      throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
+    }
+  }
+
+  ///Scarica tutti i record dalla tabella contenente i dati delle attività del DataBase e li inserisce tuttu
+  ///in una lista creata appositamente
+  static Future<void> FetchEvent() async{
+    try{
+      eventsList.clear();
+      final data = await Supabase.instance.client.from('Evento').select();
+      for(var element in data)
+      {
+        eventsList.add(Event(element['Nome'], element['Data']));
+      }
+
+    }catch(e){
+      throw FetchException("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
+    }
+  }
+
+  ///Inserisce un valore di una nuova cosa da fare all'interno del DataBase
+  static Future<void> InsertToDo(String nome, DateTime data) async{
+    try{
+      await Supabase.instance.client.from('ToDo').insert({'Nome': nome, 'Data': data});
+      FetchTime();
+      //FetchTime();
+    }catch(e)
+    {
+      throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
+    }
+  }
+
+  ///Scarica tutti i record dalla tabella contenente i dati delle cose da fare del DataBase e li inserisce tutto
+  ///in una lista creata appositamente
+  static Future<void> FetchToDo() async{
+    try{
+      toDoList.clear();
+      final data = await Supabase.instance.client.from('ToDo').select();
+      for(var element in data)
+      {
+        toDoList.add(ToDoTh(element['Nome'], element['Data']));
       }
 
     }catch(e){

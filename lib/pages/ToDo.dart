@@ -28,10 +28,7 @@ class ToDoPage extends State<ToDoPageState>
         children: [
           Container(
               color: Colori.cream,
-              child: ListView(
-                children: [
-                ],
-              )
+              child: Page()
 
           ),
           StdBottomNavBar("ToDo", context),
@@ -47,13 +44,13 @@ class ToDoPage extends State<ToDoPageState>
     if(statoPagina == Pagina.oggi)
       return ListView(
         children: [
-
+          Text("data")
         ],
       );
     else
       return ListView(
         children: [
-
+          Text("Hello")
         ],
       );
   }
@@ -79,7 +76,11 @@ class ToDoPage extends State<ToDoPageState>
                       Container(
                         margin: const EdgeInsets.only(right: 12.0, left: 5),
                         child:TextButton(
-                            onPressed: () {  },
+                            onPressed: () {
+                              setState(() {
+                                statoPagina = Pagina.oggi;
+                              });
+                            },
                             child: Text(
                               "Oggi",
                               style: TextStyle(
@@ -92,7 +93,11 @@ class ToDoPage extends State<ToDoPageState>
                         margin: const EdgeInsets.only(right: 20.0, left: 5),
                         child:TextButton(
 
-                            onPressed: () {  },
+                            onPressed: () {
+                              setState(() {
+                                statoPagina = Pagina.domani;
+                              });
+                            },
                             child: Text(
                               "Domani",
                               style: TextStyle(
