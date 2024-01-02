@@ -35,6 +35,8 @@ class DBApp{
     try{
       FetchTasks();
       FetchTime();
+      FetchEvent();
+      FetchToDo();
     }catch(e)
     {
       throw FetchException("Non è stato possibile scaricare i dati per il seguente motivo: $e");

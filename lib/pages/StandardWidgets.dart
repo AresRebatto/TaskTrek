@@ -4,10 +4,39 @@ import 'package:task_trek/Colori.dart';
 import 'package:task_trek/pages/ToDo.dart';
 import 'package:task_trek/pages/Calendar.dart';
 import 'package:task_trek/pages/Analytics.dart';
-
 import 'home.dart';
 
-
+Widget NewToDoBtn()
+{
+  return Container(
+    width: 50.0,
+    height: 50.0,
+    margin: EdgeInsets.only(top: 550, left: 320),
+    child: ElevatedButton(
+        onPressed: (){},
+        style: ElevatedButton.styleFrom(
+          primary: Colori.violet,
+          onPrimary: Colori.brown,
+        ).merge(
+          ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12), // Cambia il tuo radius qui
+              ),
+            ),
+          )
+        ),
+        child: Text(
+            "+",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 25,
+            color: Colori.white
+          ),
+        )
+    )
+      );
+}
 dynamic contesto;
 
 Widget StdBottomNavBar(String activate, dynamic context)
