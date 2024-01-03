@@ -70,10 +70,30 @@ class ToDoPage extends State<ToDoPageState>
                     ],
                   ),
                 )
-
+              else
+                Column(
+                  children: [
+                    for(var elements in DBApp.toDoList)
+                      Container(
+                        child: Row(
+                          children: [
+                            Checkbox(
+                              activeColor: Colori.violet,
+                                value: elements.State,
+                                onChanged: (bool? ans){
+                              setState(() {
+                                elements.ChangeStatus();
+                              });
+                            }),
+                            Text(elements.Nome),
+                          ],
+                        ),
+                      )
+                  ],
+                )
             ],
           ),
-          NewToDoBtn(),
+          NewToDoBtnState(DateTime.now()),
         ],
       );
     } else {
@@ -81,10 +101,37 @@ class ToDoPage extends State<ToDoPageState>
         children: [
           ListView(
             children: [
+              if(ToDoTh.GetspecificToDo(DateTime.now().add(const Duration(days: 1))).isEmpty)
+                Container(
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(top: 250.0),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 40.0,
+                        child:  Image.asset("assets/task.png"),
+                      ),
 
+                      Text(
+                        "Al momento non hai ancora definito\nattività da svolgere per oggi",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Colori.darkBrown,
+                            fontSize: 15
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              else
+                Column(
+                  children: [
+
+                  ],
+                )
             ],
           ),
-          NewToDoBtn(),
+          NewToDoBtnState(DateTime.now().add(const Duration(days: 1))),
         ],
       );
     }

@@ -135,12 +135,12 @@ class DBApp{
   ///Inserisce un valore di una nuova cosa da fare all'interno del DataBase
   static Future<void> InsertToDo(String nome, DateTime data) async{
     try{
-      await Supabase.instance.client.from('ToDo').insert({'Nome': nome, 'Data': data});
+      await Supabase.instance.client.from('ToDo').insert({'Nome': nome, 'Data': "${data.year}-${data.month}-${data.day}"});
       FetchTime();
       //FetchTime();
     }catch(e)
     {
-      throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
+      print("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
     }
   }
 
@@ -152,14 +152,28 @@ class DBApp{
       final data = await Supabase.instance.client.from('ToDo').select();
       for(var element in data)
       {
-        toDoList.add(ToDoTh(element['Nome'], element['Data']));
+        toDoList.add(ToDoTh.fetch(element['Nome'], DateTime.parse(element['Data']), element['Fatto']));
+
       }
 
     }catch(e){
-      throw FetchException("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
+      print("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
     }
   }
+  ///Modifica lo stato di un attività da fare con quello definito come parametro, che sia esso vero o falso
+  static Future<void> UpdateToDo(String td, bool state) async{
+    try{
+      await Supabase.instance.client.from('ToDo').update({'Fatto' : '$state'}).match({'Nome':'$td'});
+      FetchToDo();
+    }catch(e)
+    {
+      throw UpdateException("Non è stato possibile modificare i dati all'interno del DB per il seguente motivo: $e");
+    }
+
+  }
 }
+
+
 
 //Classi per la definizione di eccezioni specifiche per il DataBase
 class DatabaseException implements Exception {
@@ -177,4 +191,8 @@ class InsertException extends DatabaseException {
 
 class FetchException extends DatabaseException {
   FetchException(String message) : super(message);
+}
+
+class UpdateException extends DatabaseException {
+  UpdateException(String message) : super(message);
 }

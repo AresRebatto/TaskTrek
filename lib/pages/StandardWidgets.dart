@@ -1,42 +1,89 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:task_trek/Colori.dart';
+import 'package:task_trek/DataBase.dart';
 import 'package:task_trek/pages/ToDo.dart';
 import 'package:task_trek/pages/Calendar.dart';
 import 'package:task_trek/pages/Analytics.dart';
 import 'home.dart';
 
-Widget NewToDoBtn()
+DateTime data = DateTime.now();
+class NewToDoBtnState extends StatefulWidget{
+  NewToDoBtnState(DateTime dat)
+  {
+    data = dat;
+  }
+  @override
+  State<StatefulWidget> createState() => NewToDoBtn();
+
+}
+
+class NewToDoBtn extends State<NewToDoBtnState>
 {
-  return Container(
-    width: 50.0,
-    height: 50.0,
-    margin: EdgeInsets.only(top: 550, left: 320),
-    child: ElevatedButton(
-        onPressed: (){},
-        style: ElevatedButton.styleFrom(
-          primary: Colori.violet,
-          onPrimary: Colori.brown,
-        ).merge(
-          ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12), // Cambia il tuo radius qui
+  String newToDoName = "";
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 550, left: 20, right: 20),
+          height: 50,
+          width: 280,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white,
+          ),
+          child: TextField(
+            decoration: InputDecoration(
+              hintText: 'Inserisci il testo qui',
+              contentPadding: const EdgeInsets.all(15),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
               ),
             ),
-          )
-        ),
-        child: Text(
-            "+",
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 25,
-            color: Colori.white
+            onChanged: (String? value){
+              newToDoName = value!;
+            },
           ),
+        ),
+        Container(
+            width: 50.0,
+            height: 50.0,
+            margin: const EdgeInsets.only(top: 550),
+            child: ElevatedButton(
+                onPressed: (){
+                  DBApp.InsertToDo(newToDoName, data);
+                  print(newToDoName);
+                  setState(() {});
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colori.brown,
+                  backgroundColor: Colori.violet,
+                ).merge(
+                    ButtonStyle(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12), // Cambia il tuo radius qui
+                        ),
+                      ),
+                    )
+                ),
+                child: Text(
+                  "+",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colori.white
+                  ),
+                )
+            )
         )
-    )
-      );
+      ],
+    );
+  }
+
 }
+
 dynamic contesto;
 
 Widget StdBottomNavBar(String activate, dynamic context)
