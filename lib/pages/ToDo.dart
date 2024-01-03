@@ -73,7 +73,7 @@ class ToDoPage extends State<ToDoPageState>
               else
                 Column(
                   children: [
-                    for(var elements in DBApp.toDoList)
+                    for(var elements in ToDoTh.GetspecificToDo(DateTime.now()))
                       Container(
                         child: Row(
                           children: [
@@ -126,7 +126,22 @@ class ToDoPage extends State<ToDoPageState>
               else
                 Column(
                   children: [
-
+                    for(var elements in ToDoTh.GetspecificToDo(DateTime.now().add(const Duration(days: 1))))
+                      Container(
+                        child: Row(
+                          children: [
+                            Checkbox(
+                                activeColor: Colori.violet,
+                                value: elements.State,
+                                onChanged: (bool? ans){
+                                  setState(() {
+                                    elements.ChangeStatus();
+                                  });
+                                }),
+                            Text(elements.Nome),
+                          ],
+                        ),
+                      )
                   ],
                 )
             ],

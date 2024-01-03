@@ -21,6 +21,7 @@ class NewToDoBtnState extends StatefulWidget{
 class NewToDoBtn extends State<NewToDoBtnState>
 {
   String newToDoName = "";
+  TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -34,6 +35,7 @@ class NewToDoBtn extends State<NewToDoBtnState>
             color: Colors.white,
           ),
           child: TextField(
+            controller: _controller,
             decoration: InputDecoration(
               hintText: 'Inserisci il testo qui',
               contentPadding: const EdgeInsets.all(15),
@@ -47,36 +49,42 @@ class NewToDoBtn extends State<NewToDoBtnState>
           ),
         ),
         Container(
-            width: 50.0,
-            height: 50.0,
-            margin: const EdgeInsets.only(top: 550),
-            child: ElevatedButton(
-                onPressed: (){
-                  DBApp.InsertToDo(newToDoName, data);
-                  print(newToDoName);
-                  setState(() {});
-                },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colori.brown,
-                  backgroundColor: Colori.violet,
-                ).merge(
-                    ButtonStyle(
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12), // Cambia il tuo radius qui
-                        ),
+          width: 50.0,
+          height: 50.0,
+          margin: const EdgeInsets.only(top: 550),
+          child: ElevatedButton(
+              onPressed: () async{
+                DBApp.InsertToDo(newToDoName, data);
+                setState(() {
+                  _controller.clear();
+                });
+                await Future.delayed(const Duration(seconds: 3));
+                setState(() {
+                  NewToDoBtnState(data);
+                });
+
+              },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colori.brown,
+                backgroundColor: Colori.violet,
+              ).merge(
+                  ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12), // Cambia il tuo radius qui
                       ),
-                    )
+                    ),
+                  )
+              ),
+              child: Text(
+                "+",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colori.white
                 ),
-                child: Text(
-                  "+",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 25,
-                      color: Colori.white
-                  ),
-                )
-            )
+              )
+          )
         )
       ],
     );

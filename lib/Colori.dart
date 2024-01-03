@@ -9,6 +9,7 @@ class Colori
   static Color cream = const Color.fromRGBO(244,238,224,1.000);
   ///Per le sezioni in constrasto con BackGround, come ad esembio la navbar
   static Color violet = const Color.fromRGBO(109,93,110,1.000);
+  static Color todayColor = const Color.fromRGBO(109,93,110,0.600);
   ///Per le sezioni in rilievo su violet
   static Color brown = const Color.fromRGBO(79,69,87,1.000);
   ///Per le scritte scure

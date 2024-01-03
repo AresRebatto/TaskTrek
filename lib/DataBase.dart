@@ -124,11 +124,11 @@ class DBApp{
       final data = await Supabase.instance.client.from('Evento').select();
       for(var element in data)
       {
-        eventsList.add(Event(element['Nome'], element['Data']));
+        eventsList.add(Event(element['Evento'], DateTime.parse(element['Data'])));
       }
 
     }catch(e){
-      throw FetchException("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
+      print("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
     }
   }
 
@@ -136,7 +136,7 @@ class DBApp{
   static Future<void> InsertToDo(String nome, DateTime data) async{
     try{
       await Supabase.instance.client.from('ToDo').insert({'Nome': nome, 'Data': "${data.year}-${data.month}-${data.day}"});
-      FetchTime();
+      FetchToDo();
       //FetchTime();
     }catch(e)
     {
