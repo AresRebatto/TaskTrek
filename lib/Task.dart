@@ -1,4 +1,5 @@
 import 'package:task_trek/Obiettivo.dart';
+import 'package:task_trek/DataBase.dart';
 
 class Task
 {

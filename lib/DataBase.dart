@@ -188,9 +188,19 @@ class DBApp{
       await Supabase.instance.client.from('ToDo').delete().match({ 'id': pkToDo });
       FetchToDo();
     }catch(e){
-      print("Non è stato possibile eliminare il redord dal DB per il seguente motivo: $e");
+      print("Non è stato possibile eliminare il record dal DB per il seguente motivo: $e");
     }
 
+  }
+
+  ///Inserisce un nuovo record all'interno della tabella degli obiettivi
+  static Future<void> InsertObjective(int ore, int minuti, int secondi, int fk) async{
+    try{
+      await Supabase.instance.client.from('Obiettivo').insert({'Ore': ore, 'Minuti': minuti, 'Secondi': secondi, 'FK_TaskId': fk});
+    }catch(e)
+    {
+      throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
+    }
   }
 }
 
