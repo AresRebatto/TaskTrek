@@ -107,12 +107,12 @@ class DBApp{
   ///Inserisce un valore di una nuova attività all'interno del DataBase
   static Future<void> InsertEvent(String nome, DateTime data) async{
     try{
-      await Supabase.instance.client.from('Evento').insert({'Nome': nome, 'Data': data});
-      FetchTime();
+      await Supabase.instance.client.from('Evento').insert({'Evento': nome, 'Data': "${data.year}-${data.month}-${data.day}"});
+      FetchEvent();
       //FetchTime();
     }catch(e)
     {
-      throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
+      print("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
     }
   }
 
@@ -124,7 +124,7 @@ class DBApp{
       final data = await Supabase.instance.client.from('Evento').select();
       for(var element in data)
       {
-        eventsList.add(Event(element['Evento'], DateTime.parse(element['Data'])));
+        eventsList.add(Event(element['Evento'], DateTime.parse(element['Data']), int.parse(element['PK_EventoId'])));
       }
 
     }catch(e){

@@ -3,8 +3,9 @@ import 'package:task_trek/DataBase.dart';
 class Event{
   String _nome = "";
   DateTime _data = DateTime.now();
+  int PK = 0;
 
-  Event(this._nome, this._data);
+  Event(this._nome, this._data, this.PK);
 
   static List<Event> GetspecificEvent(DateTime data)
   {

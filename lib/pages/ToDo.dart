@@ -179,8 +179,8 @@ class ToDoPage extends State<ToDoPageState>
                             });
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: Colori.violet,
-                            onPrimary: Colori.brown,
+                            foregroundColor: Colori.brown,
+                            backgroundColor: Colori.violet,
                           ),
                           child: Text(
                             "Oggi",
