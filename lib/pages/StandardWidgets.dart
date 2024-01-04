@@ -428,6 +428,3 @@ Widget Analytics()
     ],
   );
 }
-
-
-

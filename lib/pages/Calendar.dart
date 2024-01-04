@@ -170,7 +170,4 @@ class CalendarPage extends State<CalendarState>
       )
     );
   }
-
-
-
 }

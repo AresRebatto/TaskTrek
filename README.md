@@ -9,13 +9,27 @@
     <img src="Docimg/Copertina.png"/>
 </div>
 
+### Che cos'è l'applicazione?
+Si tratta di un'applicazione volta alla gestione del tempo in modo ottimale
+grazie a degli strumenti pensati appositamente, prendendo anche spunto, non lo
+nascondo, da altre applicazioni simili. <br>
+L'idea che ha mosso principalmente l'idea per la nascita del progetto è stata quella
+di creare un'applicazione di questo genere, di cui ne esistono già molte, ma rendere
+accessibili quelle funzioni che sulle altre applicazioni, di solito, per essere
+utilizzate devono essere pagate. 
 ### UML delle Classi
 ### UML dei Casi D'uso
 ### Features
+1. Tenere traccia del tempo di concentrazione e della gestione delle pause.
+2. Gestire al meglio i propri impegni con la sezione dedicata del calendario.
+3. Fare una lista delle attività giornaliere che ci si propone di portare a compimento nella
+sezione apposita dell'app per poter creare la propria personale to-do list.
+4. Avere una visione grafica dei propri progressi e della propria costanza grazie alla sezione
+delle analytics con i grafici che mostrano il proprio andamento e la propria costanza.
 ### Dependencies
-1. [Table Calendar](https://pub.dev/packages/table_calendar): l'abbiamo utilizzato per
+1. [Table Calendar](https://pub.dev/packages/table_calendar): E' stato utilizzato per
 creare la grafica e le animazioni del calendario nella pagina dedicata all'interno dell'applicazione.
-2. [Supabase Flutter](https://pub.dev/packages/supabase_flutter): l'abbiamo
+2. [Supabase Flutter](https://pub.dev/packages/supabase_flutter): E' stato
 utilizzato per connettere la nostra applicazione a un database basato
 su PostgreSQL presente sulla piattaforma Open Source di Cloud Hosting 
 di [SupaBase](https://supabase.com/).
