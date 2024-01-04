@@ -8,6 +8,28 @@ import 'package:task_trek/pages/Analytics.dart';
 import 'home.dart';
 
 DateTime data = DateTime.now();
+
+PreferredSize GeneralAppBar(String title){
+  return PreferredSize(
+      preferredSize: const Size.fromHeight(70.0),
+      child: Container(
+          color: Colori.violet,
+          child: Container(
+            margin: const EdgeInsets.only(top: 30.0),
+            alignment: Alignment.center,
+            child: Text(
+              title,
+              style: TextStyle(
+                  color: Colori.white,
+                  fontSize: 22
+              ),
+            ),
+          )
+      )
+
+  );
+}
+
 class NewToDoBtnState extends StatefulWidget{
   NewToDoBtnState(DateTime dat)
   {

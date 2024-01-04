@@ -30,7 +30,7 @@ class CalendarPage extends State<CalendarState>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CalendarAppBar(),
+      appBar: GeneralAppBar("calendario"),
       body: Stack(
         children: [
           Container(
@@ -72,11 +72,13 @@ class CalendarPage extends State<CalendarState>
                           Container(
                             margin: EdgeInsets.only(left: 20.0),
                             child: TextButton(
-                              onPressed: (){},
-                              child: const Text("Elimina"),
+                              onPressed: (){
+                                DBApp.RemoveEvent(dayEvents[index].PK);
+                              },
                               style: ElevatedButton.styleFrom(
                                 foregroundColor: Colori.brown,
                               ),
+                              child: const Text("Elimina"),
                             ),
                           )
                         ],
@@ -169,25 +171,6 @@ class CalendarPage extends State<CalendarState>
     );
   }
 
-  PreferredSize CalendarAppBar(){
-    return PreferredSize(
-        preferredSize: const Size.fromHeight(70.0),
-        child: Container(
-            color: Colori.violet,
-            child: Container(
-              margin: const EdgeInsets.only(top: 30.0),
-              alignment: Alignment.center,
-              child: Text(
-                    "calendario",
-                    style: TextStyle(
-                        color: Colori.white,
-                        fontSize: 22
-                    ),
-                  ),
-            )
-        )
 
-    );
-  }
 
 }

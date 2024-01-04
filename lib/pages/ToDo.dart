@@ -86,6 +86,18 @@ class ToDoPage extends State<ToDoPageState>
                               });
                             }),
                             Text(elements.Nome),
+                            Container(
+                              margin: const EdgeInsets.only(left: 10.0),
+                              child: TextButton(
+                                  onPressed: (){
+                                    DBApp.RemoveToDo(elements.PK);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    foregroundColor: Colori.brown,
+                                  ),
+                                  child: Text("Elimina")
+                              ),
+                            )
                           ],
                         ),
                       )
@@ -139,6 +151,18 @@ class ToDoPage extends State<ToDoPageState>
                                   });
                                 }),
                             Text(elements.Nome),
+                            Container(
+                              margin: const EdgeInsets.only(left: 10.0),
+                              child: TextButton(
+                                  onPressed: (){
+                                    DBApp.RemoveToDo(elements.PK);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    foregroundColor: Colori.brown,
+                                  ),
+                                  child: Text("Elimina")
+                              ),
+                            )
                           ],
                         ),
                       )

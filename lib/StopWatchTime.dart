@@ -9,7 +9,7 @@ class StopWatchTime {
   int _ore = 0;
   int _minuti = 0;
   int _secondi = 0;
-  int _idTask=28;
+  int _idTask= 0;
 
   //Attributi per l'interfaccia
   static String startText = "Premere per far\npartire il cronometro";
@@ -76,4 +76,85 @@ class StopWatchTime {
     return null;
   }
 
+  static String ConcentrazioneTotale()
+  {
+    int ore = 0;
+    int minuti = 0;
+    int secondi = 0;
+    String res = "";
+
+    for(var elements in DBApp.timeList)
+    {
+      ore += elements.Ore;
+      minuti += elements.Minuti;
+      secondi += elements.Secondi;
+    }
+
+    if(ore < 9)
+    {
+      res += "0$ore:";
+    }else {
+      res += "$ore:";
+    }
+
+    if(minuti < 9)
+    {
+      res += "0$minuti:";
+    }else {
+      res += "$minuti:";
+    }
+
+    if(secondi < 9)
+    {
+      res += "0$secondi";
+    }else {
+      res += "$secondi";
+    }
+    return res;
+  }
+  static String ConcentrazioneMedia()
+  {
+    int ore = 0;
+    int minuti = 0;
+    int secondi = 0;
+    String res = "";
+
+    for(var elements in DBApp.timeList)
+    {
+      ore += elements.Ore;
+      minuti += elements.Minuti;
+      secondi += elements.Secondi;
+    }
+
+    ore = (ore/DBApp.timeList.length).round();
+    minuti = (minuti/DBApp.timeList.length).round();
+    secondi = (secondi/DBApp.timeList.length).round();
+
+    if(ore < 9)
+    {
+      res += "0$ore:";
+    }else {
+      res += "$ore:";
+    }
+
+    if(minuti < 9)
+    {
+      res += "0$minuti:";
+    }else {
+      res += "$minuti:";
+    }
+
+    if(secondi < 9)
+    {
+      res += "0$secondi";
+    }else {
+      res += "$secondi";
+    }
+    return res;
+  }
+
+  //Properties
+  int get Ore => _ore;
+  int get Minuti => _minuti;
+  int get Secondi => _secondi;
 }

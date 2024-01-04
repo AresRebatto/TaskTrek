@@ -124,12 +124,23 @@ class DBApp{
       final data = await Supabase.instance.client.from('Evento').select();
       for(var element in data)
       {
-        eventsList.add(Event(element['Evento'], DateTime.parse(element['Data']), int.parse(element['PK_EventoId'])));
+        eventsList.add(Event(element['Evento'], DateTime.parse(element['Data']), element['PK_EventoId'] as int));
       }
 
     }catch(e){
       print("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
     }
+  }
+
+  ///Funzione per rimuovere un recordo della tabella Evento data la Primary Key
+  static Future<void> RemoveEvent(pkEvent) async{
+    try{
+      await Supabase.instance.client.from('Evento').delete().match({ 'PK_EventoId': pkEvent });
+      FetchEvent();
+    }catch(e){
+      print("Non è stato possibile eliminare il redord dal DB per il seguente motivo: $e");
+    }
+
   }
 
   ///Inserisce un valore di una nuova cosa da fare all'interno del DataBase
@@ -152,7 +163,7 @@ class DBApp{
       final data = await Supabase.instance.client.from('ToDo').select();
       for(var element in data)
       {
-        toDoList.add(ToDoTh.fetch(element['Nome'], DateTime.parse(element['Data']), element['Fatto']));
+        toDoList.add(ToDoTh.fetch(element['Nome'], DateTime.parse(element['Data']), element['Fatto'], element['id'] as int));
 
       }
 
@@ -168,6 +179,16 @@ class DBApp{
     }catch(e)
     {
       throw UpdateException("Non è stato possibile modificare i dati all'interno del DB per il seguente motivo: $e");
+    }
+  }
+
+  ///Funzione per rimuovere un recordo della tabella Evento data la Primary Key
+  static Future<void> RemoveToDo(pkToDo) async{
+    try{
+      await Supabase.instance.client.from('ToDo').delete().match({ 'id': pkToDo });
+      FetchToDo();
+    }catch(e){
+      print("Non è stato possibile eliminare il redord dal DB per il seguente motivo: $e");
     }
 
   }
@@ -195,4 +216,8 @@ class FetchException extends DatabaseException {
 
 class UpdateException extends DatabaseException {
   UpdateException(String message) : super(message);
+}
+
+class DeleteException extends DatabaseException {
+  DeleteException(String message) : super(message);
 }

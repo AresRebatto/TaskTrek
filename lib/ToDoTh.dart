@@ -3,10 +3,11 @@ import 'package:task_trek/DataBase.dart';
 class ToDoTh{
   String _nome = "";
   DateTime _data = DateTime.now();
+  int PK = 0;
   bool _state = false;
 
   ToDoTh(this._nome, this._data);
-  ToDoTh.fetch(this._nome, this._data, this._state);
+  ToDoTh.fetch(this._nome, this._data, this._state, this.PK);
 
   ///Data una specifica data, lui restituisce una lista con all'interno tutti le istanze
   ///della lista delle cose da fare che hanno come valore dell'attributo data, quello
