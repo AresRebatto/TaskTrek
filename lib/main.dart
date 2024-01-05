@@ -10,7 +10,6 @@ void main() {
   //metodi per inizializzare e scaricare tutti i dati in locale
   DBApp.Inizialize();
   DBApp.FetchAll();
-
   //Avvia l'app
   runApp(const MyApp());
 }

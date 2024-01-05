@@ -1,6 +1,7 @@
 import 'package:task_trek/DataBase.dart';
 import 'dart:async';
 import 'package:task_trek/Task.dart';
+
 enum activateState{
   attivo,
   fermo
@@ -10,6 +11,7 @@ class StopWatchTime {
   int _minuti = 0;
   int _secondi = 0;
   int _idTask= 0;
+  DateTime _data = DateTime.now();
 
   //Attributi per l'interfaccia
   static String startText = "Premere per far\npartire il cronometro";
@@ -18,7 +20,7 @@ class StopWatchTime {
   static activateState attivo = activateState.fermo;
 
   StopWatchTime(){}
-  StopWatchTime.fetch(this._idTask, this._ore, this._minuti, this._secondi);
+  StopWatchTime.fetch(this._idTask, this._ore, this._minuti, this._secondi, this._data);
 
   void ChangeInterface()
   {
@@ -58,7 +60,7 @@ class StopWatchTime {
   //classe DBApp per inserire un nuovo valore nella tabella tempo
   Future<void> bloccaTempo() async{
     attivo = activateState.fermo;
-    DBApp.InsertTime(this._ore, this._minuti, this._secondi, this._idTask);
+    DBApp.InsertTime(this._ore, this._minuti, this._secondi, this._idTask, DateTime.now());
 
     _ore = 0;
     _minuti = 0;
@@ -76,6 +78,7 @@ class StopWatchTime {
     return null;
   }
 
+  ///Ritorna il tempo di concentrazione totale sommando tutti i tempi
   static String ConcentrazioneTotale()
   {
     int ore = 0;
@@ -112,6 +115,9 @@ class StopWatchTime {
     }
     return res;
   }
+
+  ///Ritorna il tempo di concentrazione media facendo la media matematica
+  ///con tutti i tempi all'interno di timeList
   static String ConcentrazioneMedia()
   {
     int ore = 0;
@@ -153,8 +159,13 @@ class StopWatchTime {
     return res;
   }
 
+
+
+
   //Properties
   int get Ore => _ore;
   int get Minuti => _minuti;
   int get Secondi => _secondi;
+  int get IdTask => _idTask;
+  DateTime get Data => _data;
 }

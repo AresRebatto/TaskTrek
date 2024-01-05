@@ -77,9 +77,9 @@ class DBApp{
     }
   }
   ///Inserisce un valore di un nuovo tempo all'interno del DataBase
-  static Future<void> InsertTime(int hours, int minutes, int seconds, int FK) async{
+  static Future<void> InsertTime(int hours, int minutes, int seconds, int FK, DateTime data) async{
     try{
-      await Supabase.instance.client.from('Tempo').insert({'FK_TaskId': FK, 'Ore': hours, 'Minuti': minutes, 'Secondi': seconds});
+      await Supabase.instance.client.from('Tempo').insert({'FK_TaskId': FK, 'Ore': hours, 'Minuti': minutes, 'Secondi': seconds, 'Data': "${data.year}-${data.month}-${data.day}"});
       FetchTime();
       //FetchTime();
     }catch(e)
@@ -96,7 +96,7 @@ class DBApp{
       final data = await Supabase.instance.client.from('Tempo').select();
       for(var element in data)
       {
-        timeList.add(StopWatchTime.fetch(element['FK_TaskId'], element['Ore'], element['Minuti'], element['Secondi']));
+        timeList.add(StopWatchTime.fetch(element['FK_TaskId'], element['Ore'], element['Minuti'], element['Secondi'], DateTime.parse(element['Data'])));
       }
 
     }catch(e){
