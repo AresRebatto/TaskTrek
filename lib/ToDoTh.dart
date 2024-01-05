@@ -17,7 +17,7 @@ class ToDoTh{
     return DBApp.toDoList.where((elemento) => elemento.Data.year == data.year && elemento.Data.month == data.month && elemento.Data.day == data.day).toList();
   }
 
-  void ChangeStatus()
+  void ChangeState()
   {
     _state = !_state;
     DBApp.UpdateToDo(_nome, _state);

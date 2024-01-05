@@ -82,7 +82,7 @@ class ToDoPage extends State<ToDoPageState>
                                 value: elements.State,
                                 onChanged: (bool? ans){
                               setState(() {
-                                elements.ChangeStatus();
+                                elements.ChangeState();
                               });
                             }),
                             Text(elements.Nome),
@@ -147,7 +147,7 @@ class ToDoPage extends State<ToDoPageState>
                                 value: elements.State,
                                 onChanged: (bool? ans){
                                   setState(() {
-                                    elements.ChangeStatus();
+                                    elements.ChangeState();
                                   });
                                 }),
                             Text(elements.Nome),
