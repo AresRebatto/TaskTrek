@@ -9,7 +9,7 @@
     <img src="Docimg/Copertina.png"/>
 </div>
 
-### Che cos'è Task Trek?
+## Che cos'è Task Trek?
 Si tratta di un'applicazione volta alla gestione del tempo in modo ottimale
 grazie a degli strumenti pensati appositamente, prendendo anche spunto, non lo
 nascondo, da altre applicazioni simili. <br>
@@ -17,7 +17,7 @@ L'idea che ha mosso principalmente l'idea per la nascita del progetto è stata q
 di creare un'applicazione di questo genere, di cui ne esistono già molte, ma rendere
 accessibili quelle funzioni che sulle altre applicazioni, di solito, per essere
 utilizzate devono essere pagate. 
-### UML delle Classi
+## UML delle Classi
 <img src="Docimg/DiagrammadelleClassi.jpg">
 In questo diagramma possiamo osservare le varie classi utilizzate per questo progetto:
 è evidente come quella principale che comunica con tutte le altre sia DBApp, ovvero la classe
@@ -37,11 +37,12 @@ inserire una lista come le classiche ToDoList che potete trovare in giro. Evento
 registrare i vari eventi che saranno poi visualizzabili nella sezione calendario dell'applicazione.<br><br>
 Abbiamo infine le classi per generare le eccezioni in caso di errore per qualche operazione all'interno della classe del
 DataBase(Chiaramente le eccezioni sono personalizzate e indirizzate a ogni possibile errore che possa verificarsi nell'interazione)
-e la classe Colori che è una semplice classe per la gestione dei colori dell'applicazione: questo consente di avere uno standard e
-anche un punto accessibile per cambiare in qualsiasi momento i colori all'applicazione in modo veloce, cosa molto utile nella definizione
-di, ad esempio, dei temi.
+e due classi considerabili come indipendenti che sono la classe Colori, ovvero una semplice classe per la gestione dei colori dell'applicazione: questo consente di avere uno standard e
+anche un punto accessibile per cambiare in qualsiasi momento i colori della palette in modo veloce, cosa molto utile nella definizione
+di, ad esempio, dei temi, e la classe ChartData, ovvero una classe le qui istanze vengono utilizzate come dati per i grafici nella sezione
+Analytics dell'applicazione.
 
-### UML dei Casi D'uso
+## UML dei Casi D'uso
 <img src="Docimg/DiagrammaDeiCasiDuso.jpg"><br>
 All’interno del diagramma dei casi d’uso possiamo trovare quattro casi d’uso principali: Gestione Task, Avviare il timer, Gestione Eventi, Gestione Insights. 
 Ognuno di questi a sua volta include o estende altri casi d'uso. Ad esempio “Gestione Task” è un caso incluso tramite l'include ciò significa che fa parte del 
@@ -56,7 +57,7 @@ quindi quello principale che in questo caso è “Avviare il timer” si modera 
 Eventi” viene collegato con un include al caso “Visualizzare calendario Eventi” che a sua volte possiede delle estensioni come il caso “Creare nuovi 
 Eventi”, “Eliminare Eventi già creati”, “Modificare Eventi già esistenti”. Infine il caso d’uso “Gestione Insights” include il caso “Visualizzare dati”. 
 Per concludere tutti e i quattro casi d’uso principali sono collegati tramite una assegnazione a un attore che in questo caso è chiamato “User”.
-### Features
+## Features
 1. ⌚Tenere traccia del tempo di concentrazione e della gestione delle pause.
 2. 📅Gestire al meglio i propri impegni con la sezione dedicata del calendario.
 3. ✅Fare una lista delle attività giornaliere che ci si propone di portare a compimento nella
@@ -74,7 +75,7 @@ di [SupaBase](https://supabase.com/).
 creazione dei vari grafici nella sezione analytics dell'applicazione, creata appositamente per documentare graficamente 
 i propri progressi e il raggiungimento dei propri obiettivi.
 
-### Funzionamento dello Script
+## Funzionamento dello Script
 Ogni pagina ha al suo interno un Stack utilizzato per la creazione di una Bottom NavBar personalizzata,
 la quale a sua volta è stata scritta dentro un file apposito dove si trovano tutti i Widget standard utilizzati
 in più pagine come anche l'app bar. <br> <br>
@@ -85,4 +86,31 @@ L'applicazione comunica inoltre con un DataBase in cloud Hosting grazie al servi
 creata, per questa comunicazione, una classe apposita che di chiama DBApp e che al suo interno ha un metodo per 
 inizializzare l'istanza che permette di comunicare con il DataBase e tutte le funzioni per scaricare, caricare, 
 eliminare e modificare eventuali record sulle tabelle. Sono state create anche delle classi per generare delle
-eccezioni apposite in caso di mal funzionamento, utili soprattutto in fase di scrittura del codice.
+eccezioni apposite in caso di mal funzionamento, utili soprattutto in fase di scrittura del codice.<br>
+Osserviamo ora il comportamento delle altre classi con cui DBApp comunica:
+### Classe Evento
+**Metodo getSpecificEvent(DateTime data)**:
+Come parametro richiede una data espressa col tipo DateTime e la sua funzione è quella di ottenere gli eventi, ritornando
+quindi un'altra lista, della list all'interno di DBApp che hanno la data specificata come parametro al metodo.
+### Classe Obiettivo
+Questa classe viene utilizzata principalmente per memorizzare i dati inerenti a un obiettivo correlato a una data
+task, inclusi l'ID della task a cui fa riferimento e le ore, i minuti e i secondi che l'utente ha scelto di fissare.
+### Classe StopWatchTime
+**Metodo avviaTempo(int taskId)**:
+Richiede come parametro l'ID di una task e ha lo scopo di far partire un cronometro che registrerà il tempo per cui
+viene svolta l'attività. <br> <br>
+**Metodo bloccaTempo()**:
+Non richiede nessun parametro e ha semplicemente lo scopo di bloccare lo scorrimento del cronometro e richiamare il metodo
+nella classe DBApp per inserire il valore nek DataBase. <br><br>
+**Metodo findTaskId(String searchString)**: 
+Come parametro richiede la stringa che corrisponde al nome della Task da trovare. Una volta scansionata la lista di Task, che
+si trova sempre nella classe DBApp, restituisce l'Id che corrisponde alla task cui nome era il parametro del metodo.
+**Metodo ConcentrazioneTotale() e Metodo ConcentrazioneMedia()**:
+Si occupano rispettivamente di sommare tutti i tempi nella lista apposita e di ritornare quella somma e di fare la media matematica
+(quindi prima sommando e poi dividendo per il numero di tempi totali) dei tempi dentro la lista e ritornandone il valore.
+### Classe Task
+**Metodo SumTaskTimes()**:
+Calcola la somma totale dei tempi, filtrandoli nella lista dei tempi, dell'istanza corrente di task.
+**Metodo SumTasksTimeFromDate(DateTime time)**:
+Come parametro richiede una data e si occupa di sommare tutti i tempi registrati in quella data, convertendo il tutto in ore
+e ritornandone il valore

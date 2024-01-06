@@ -47,9 +47,9 @@ class Task
     DBApp.timeList.where((times) => times.Data.year == time.year && times.Data.month == time.month && times.Data.day == time.day).toList();
 
     if(a.isEmpty){return 0;}
-    return ((a.map((item) => item.Ore).reduce((a, b) => a*3600 + b*3600))
-        +(a.map((item) => item.Minuti).reduce((a, b) => a*60 + b*60))
-        +(a.map((item) => item.Secondi).reduce((a, b) => a + b))).toDouble();
+    return ((a.map((item) => item.Ore).reduce((a, b) => a + b))
+        +(a.map((item) => item.Minuti).reduce((a, b) => a + b)/60)
+        +(a.map((item) => item.Secondi).reduce((a, b) => a + b)/3600)).toDouble();
 
   }
 

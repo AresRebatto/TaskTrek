@@ -29,7 +29,7 @@ class AnalyticsPageState extends State<AnalyticsPage>
     }
 
     for(int i = 0; i < 7; i++){
-      scndChartData.add(FlSpot((i+1).toDouble(), Task.SumTasksTimeFromDate(DateTime.now().subtract(Duration(days: i)))));
+      scndChartData.add(FlSpot((i+1).toDouble(), (Task.SumTasksTimeFromDate(DateTime.now().subtract(Duration(days: i)))*math.pow(10, 1)).round()/math.pow(10, 1)));
     }
     if(scndChartData.isEmpty){print("La lista dei dati è vuota");}
     return Scaffold(
