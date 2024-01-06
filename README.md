@@ -9,7 +9,7 @@
     <img src="Docimg/Copertina.png"/>
 </div>
 
-### Che cos'è l'applicazione?
+### Che cos'è Task Trek?
 Si tratta di un'applicazione volta alla gestione del tempo in modo ottimale
 grazie a degli strumenti pensati appositamente, prendendo anche spunto, non lo
 nascondo, da altre applicazioni simili. <br>
