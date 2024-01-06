@@ -6,10 +6,13 @@ import 'package:task_trek/DataBase.dart';
 import 'package:task_trek/StopWatchTime.dart';
 import 'package:task_trek/Task.dart';
 
-void main() {
+void main() async{
   //metodi per inizializzare e scaricare tutti i dati in locale
   DBApp.Inizialize();
   DBApp.FetchAll();
+
+  //Serve per dare il tempo di scaricare i dati che poi vanno renderizzati nella home
+  await Future.delayed(const Duration(seconds: 2));
   //Avvia l'app
   runApp(const MyApp());
 }

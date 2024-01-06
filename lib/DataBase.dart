@@ -25,7 +25,7 @@ class DBApp{
     }catch(e)
     {
       //throw ConnectionException("Non è stato possibile connettersi al DB per il seguente motivo: $e");
-      print("Non è stato possibile connettersi al DB per il seguente motivo: $e");
+      throw ConnectionException("Non è stato possibile connettersi al DB per il seguente motivo: $e");
     }
   }
 
@@ -52,7 +52,7 @@ class DBApp{
 
     }catch(e)
     {
-      print("Non è stato possibile connettersi al DB per il seguente motivo: $e");
+      throw InsertException("Non è stato possibile connettersi al DB per il seguente motivo: $e");
       //throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
     }
 
@@ -73,7 +73,19 @@ class DBApp{
       }
 
     }catch(e){
-      print("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
+      throw FetchException("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
+    }
+  }
+
+  ///Rimuove una task dal DataBase
+  static Future<void> RemoveTask(int pkTask) async{
+    try{
+      RemoveObjectivefromTaskId(pkTask);
+      RemoveTimefromTaskId(pkTask);
+      await Supabase.instance.client.from('Task').delete().match({ 'PK_TakId': pkTask });
+      FetchTasks();
+    }catch(e){
+      throw DeleteException("Non è stato possibile eliminare il redord dal DB per il seguente motivo: $e");
     }
   }
   ///Inserisce un valore di un nuovo tempo all'interno del DataBase
@@ -84,7 +96,7 @@ class DBApp{
       //FetchTime();
     }catch(e)
     {
-      print("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
+      throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
     }
   }
 
@@ -104,6 +116,18 @@ class DBApp{
     }
   }
 
+  ///Eliminai i tempi di una specifica task dal DataBase. E' fondamentale nel momento
+  ///in cui si decide di cancellare una Task: va infatti richiamato prima questo metodo per
+  ///cancellare tutti i dati che dipendono dalla Task che si intende eliminare
+  static Future<void> RemoveTimefromTaskId(int taskId) async{
+    try{
+      await Supabase.instance.client.from('Tempo').delete().match({ 'FK_TaskId': taskId });
+      FetchTasks();
+    }catch(e){
+      throw DeleteException("Non è stato possibile eliminare il redord dal DB per il seguente motivo: $e");
+    }
+  }
+
   ///Inserisce un valore di una nuova attività all'interno del DataBase
   static Future<void> InsertEvent(String nome, DateTime data) async{
     try{
@@ -112,7 +136,7 @@ class DBApp{
       //FetchTime();
     }catch(e)
     {
-      print("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
+      throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
     }
   }
 
@@ -128,7 +152,7 @@ class DBApp{
       }
 
     }catch(e){
-      print("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
+      throw FetchException("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
     }
   }
 
@@ -138,7 +162,7 @@ class DBApp{
       await Supabase.instance.client.from('Evento').delete().match({ 'PK_EventoId': pkEvent });
       FetchEvent();
     }catch(e){
-      print("Non è stato possibile eliminare il redord dal DB per il seguente motivo: $e");
+      throw DeleteException("Non è stato possibile eliminare il redord dal DB per il seguente motivo: $e");
     }
 
   }
@@ -151,7 +175,7 @@ class DBApp{
       //FetchTime();
     }catch(e)
     {
-      print("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
+      throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
     }
   }
 
@@ -168,7 +192,7 @@ class DBApp{
       }
 
     }catch(e){
-      print("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
+      throw FetchException("Non è stato possibile scaricare i dati dal DB per il seguente motivo: $e");
     }
   }
   ///Modifica lo stato di un attività da fare con quello definito come parametro, che sia esso vero o falso
@@ -188,7 +212,7 @@ class DBApp{
       await Supabase.instance.client.from('ToDo').delete().match({ 'id': pkToDo });
       FetchToDo();
     }catch(e){
-      print("Non è stato possibile eliminare il record dal DB per il seguente motivo: $e");
+      throw DeleteException("Non è stato possibile eliminare il record dal DB per il seguente motivo: $e");
     }
 
   }
@@ -200,6 +224,18 @@ class DBApp{
     }catch(e)
     {
       throw InsertException("Non è stato possibile scrivere dei dati all'interno del DB per il seguente motivo: $e");
+    }
+  }
+
+  ///Eliminai l'obiettivo di una specifica task dal DataBase. E' fondamentale nel momento
+  ///in cui si decide di cancellare una Task: va infatti richiamato prima questo metodo per
+  ///cancellare tutti i dati che dipendono dalla Task che si intende eliminare
+  static Future<void> RemoveObjectivefromTaskId(int taskId) async{
+    try{
+      await Supabase.instance.client.from('Obiettivo').delete().match({ 'FK_TaskId': taskId });
+      FetchTasks();
+    }catch(e){
+      throw DeleteException("Non è stato possibile eliminare il redord dal DB per il seguente motivo: $e");
     }
   }
 }

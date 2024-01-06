@@ -65,12 +65,22 @@ class HomePage extends State<HomePageState>{
           for(var elements in DBApp.taskList)
              DropdownMenuItem(
                  value: elements.Nome,
-                child: Text(
-                  elements.Nome,
-                  style: const TextStyle(
-                    fontSize: 13.5
+                child: GestureDetector(
+                  onLongPress: (){
+                    setState(() {
+                      DBApp.taskList.remove(elements);
+                      selVal = "";
+                    });
+                    DBApp.RemoveTask(elements.taskId!);
+                  },
+                  child: Text(
+                    elements.Nome,
+                    style: const TextStyle(
+                        fontSize: 13.5
+                    ),
                   ),
                 )
+
              ),
           const DropdownMenuItem(
             value: "NewTask",

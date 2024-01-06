@@ -91,6 +91,9 @@ class ToDoPage extends State<ToDoPageState>
                               child: TextButton(
                                   onPressed: (){
                                     DBApp.RemoveToDo(elements.PK);
+                                    setState(() {
+                                      DBApp.toDoList.remove(elements);
+                                    });
                                   },
                                   style: ElevatedButton.styleFrom(
                                     foregroundColor: Colori.brown,
@@ -156,6 +159,9 @@ class ToDoPage extends State<ToDoPageState>
                               child: TextButton(
                                   onPressed: (){
                                     DBApp.RemoveToDo(elements.PK);
+                                    setState(() {
+                                      DBApp.toDoList.remove(elements);
+                                    });
                                   },
                                   style: ElevatedButton.styleFrom(
                                     foregroundColor: Colori.brown,

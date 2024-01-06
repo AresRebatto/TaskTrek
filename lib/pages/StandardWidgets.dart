@@ -6,6 +6,7 @@ import 'package:task_trek/pages/ToDo.dart';
 import 'package:task_trek/pages/Calendar.dart';
 import 'package:task_trek/pages/Analytics.dart';
 import 'home.dart';
+import 'package:task_trek/ToDoTh.dart';
 
 DateTime data = DateTime.now();
 
@@ -75,16 +76,14 @@ class NewToDoBtn extends State<NewToDoBtnState>
           height: 50.0,
           margin: const EdgeInsets.only(top: 550),
           child: ElevatedButton(
-              onPressed: () async{
+              onPressed: (){
+                setState(() {
+                  DBApp.toDoList.add(ToDoTh(newToDoName, data));
+                });
                 DBApp.InsertToDo(newToDoName, data);
                 setState(() {
                   _controller.clear();
                 });
-                await Future.delayed(const Duration(seconds: 3));
-                setState(() {
-                  NewToDoBtnState(data);
-                });
-
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colori.brown,

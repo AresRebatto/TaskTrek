@@ -3,6 +3,7 @@ import 'package:task_trek/Colori.dart';
 import 'package:task_trek/pages/StandardWidgets.dart';
 import 'package:task_trek/DataBase.dart';
 import 'package:task_trek/StopWatchTime.dart';
+import 'package:task_trek/Task.dart';
 
 class NewTaskState extends StatefulWidget {
   const NewTaskState({super.key});
@@ -117,13 +118,13 @@ class NewTaskPage extends State<NewTaskState>{
               ],
             ),
             Container(
-              margin: EdgeInsets.only(top: 300.0, left: 200.0),
+              margin: EdgeInsets.only(top: 34.0, left: 200.0),
               child: ElevatedButton(
                 onPressed: () async{
                   setState(() {
                     DBApp.InsertTask(newTaskName);
+                    DBApp.taskList.add(Task(newTaskName, 0));
                   });
-                  await Future.delayed(const Duration(seconds: 1));
                   Navigator.pop(context);
                   await Future.delayed(const Duration(seconds: 5));
                   DBApp.InsertObjective(int.parse(ore), int.parse(minuti), int.parse(secondi), StopWatchTime.findTaskId(newTaskName)!);
