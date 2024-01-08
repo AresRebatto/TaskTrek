@@ -28,8 +28,8 @@ class AnalyticsPageState extends State<AnalyticsPage>
       frstChartData.add(ChartData(task.Nome, task.SumTaskTimes()));
     }
 
-    for(int i = 0; i < 7; i++){
-      scndChartData.add(FlSpot((i+1).toDouble(), (Task.SumTasksTimeFromDate(DateTime.now().subtract(Duration(days: i)))*math.pow(10, 1)).round()/math.pow(10, 1)));
+    for(int i = 6; i >= 0; i--){
+      scndChartData.add(FlSpot((i+1).toDouble(), (Task.SumTasksTimeFromDate(DateTime.now().subtract(Duration(days: 6-i)))*math.pow(10, 1)).round()/math.pow(10, 1)));
     }
     if(scndChartData.isEmpty){print("La lista dei dati è vuota");}
     return Scaffold(
